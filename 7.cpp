@@ -23,56 +23,56 @@ int main() {
 	int maxday;
 	cin >> month;
 	switch (month) {
-		case 1
-			Suf_Month = "Январь";
-			maxday = 31;
-			break;
-			case 2
-				Suf_Month = "Февраль";
-				maxday = 28;
-				break;
-				case 3
-					Suf_Month = "Март";
-					maxday = 31;
-					break;
-					case 4
-						Suf_Month = "Апрель";
-						maxday = 30;
-						break;
-						case 5
-							Suf_Month = "Май";
-							maxday = 31;
-							break;
-							case 6
-								Suf_Month = "Июнь";
-								maxday = 30;
-								break;
-								case 7
-									Suf_Month = "Июль";
-									maxday = 31;
-									break;
-									case 8
-										Suf_Month = "Август";
-										maxday = 31;
-										break;
-										case 9
-											Suf_Month = "Сентябрь";
-											maxday = 30;
-											break;
-											case 10
-												Suf_Month = "Октябрь";
-												maxday = 31;
-												break;
-												case 11
-													Suf_Month = "Ноябрь";
-													maxday = 30;
-													break;
-													case 12
-														Suf_Month = "Декабрь";
-														maxday = 31;
-														break;
-													default:
-														cout << "Номер месяца набран не правильно" << endl;
+	case 1:
+		Suf_Month = "Январь";
+		maxday = 31;
+		break;
+	case 2:
+		Suf_Month = "Февраль";
+		maxday = 28;
+		break;
+	case 3:
+		Suf_Month = "Март";
+		maxday = 31;
+		break;
+	case 4:
+		Suf_Month = "Апрель";
+		maxday = 30;
+		break;
+	case 5:
+		Suf_Month = "Май";
+		maxday = 31;
+		break;
+	case 6:
+		Suf_Month = "Июнь";
+		maxday = 30;
+		break;
+	case 7:
+		Suf_Month = "Июль";
+		maxday = 31;
+		break;
+	case 8:
+		Suf_Month = "Август";
+		maxday = 31;
+		break;
+	case 9:
+		Suf_Month = "Сентябрь";
+		maxday = 30;
+		break;
+	case 10:
+		Suf_Month = "Октябрь";
+		maxday = 31;
+		break;
+	case 11:
+		Suf_Month = "Ноябрь";
+		maxday = 30;
+		break;
+	case 12:
+		Suf_Month = "Декабрь";
+		maxday = 31;
+		break;
+				default:
+				cout << "Номер месяца набран не правильно" << endl;
 	}
 	cout << "Введите номер дня" << endl;
 	cin >> day;
@@ -177,7 +177,7 @@ int main() {
 	default:
 		cout << "Такого дня нет" << endl;
 	}
-	cout << Sur_Day << Sur_Month << endl;
+	cout << Suf_Day << Suf_Month << endl;
 
 	return 0;
 }
