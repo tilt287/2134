@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(0, "");
+
+    int a;
+    int razmer;
+    int kvadrat;
+
+    cout << "Программа - \"Геометрические фигура\"\n[1] Квадрат\n";
+    cout << "Выберите фигуру: ";
+    cin >> a;
+    system("cls");
+
+    if (a == 1) {
+        cout << "Программа - \"Квадрат\"\n";
+        cout << "Введите размер квадрата: ";
+        cin >> razmer;
+
+        if (razmer < 2) {
+            cout << "Размер\n";
+            return 0;
+        }
+
+        cout << "\nВыберите заполняемую четверть:\n";
+        cout << "[1] Верхняя левая\n";
+        cout << "[2] Верхняя правая\n";
+        cout << "[3] Нижняя левая\n";
+        cout << "[4] Нижняя правая\n";
+        cout << "Ваш выбор: ";
+        cin >> kvadrat;
+
+        system("cls");
+        cout << "Результат:\n\n";
+
+        for (int y = 0; y < razmer; y++) {
+            for (int x = 0; x < razmer; x++) {
+
+                int midX = razmer / 2;
+                int midY = razmer / 2;
+
+                bool inKvadrat = false;
+
+                switch (kvadrat) {
+                case 1:
+                    inKvadrat = (x < midX && y < midY);
+                    break;
+                case 2:
+                    inKvadrat = (x >= midX && y < midY);
+                    break;
+                case 3:
+                    inKvadrat = (x < midX && y >= midY);
+                    break;
+                case 4:
+                    inKvadrat = (x >= midX && y >= midY);
+                    break;
+                }
+
+                if (inKvadrat) {
+
+                    cout << "1 ";
+                }
+                else {
+
+                    cout << ". ";
+                }
+            }
+            cout << "\n";
+        }
+    }
+
+    return 0;
+}
