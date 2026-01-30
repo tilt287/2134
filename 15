@@ -1,0 +1,218 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    setlocale(0, "");
+
+    int chislo;
+    int a;
+    int visota;
+    int shirena;
+    char textura;
+
+    cout << "Программа - \"Геометрические фигуры\"\n[1] Линия\n[2] Квадрат\n[3] Прямоугольник\n[4] Треугольник\n[5] Решетка\n";
+    cout << "Выберите фигуру: ";
+    cin >> a;
+    system("cls");
+
+    switch (a) {
+    case 1:
+        cout << "[1] Вертикально\n[2] Горизонтально\n";
+        cin >> a;
+        system("cls");
+        switch (a) {
+        case 1:
+            cout << "Введите длину линии: ";
+            cin >> chislo;
+            cout << "Введите текстуру: ";
+            cin >> textura;
+            system("cls");
+            cout << "Результат:\n";
+            while (chislo != 0) {
+                cout << textura << "\n";
+                chislo -= 1;
+            }
+            break;
+        case 2:
+            cout << "Введите длину линии: ";
+            cin >> chislo;
+            cout << "Введите текстуру: ";
+            cin >> textura;
+            system("cls");
+            cout << "Результат:\n";
+            while (chislo != 0) {
+                cout << textura << " ";
+                chislo -= 1;
+            }
+            cout << "\n";
+            break;
+        }
+        break;
+
+    case 2:
+        cout << "[1] Заполненный\n[2] Пустой\n";
+        cin >> a;
+        system("cls");
+        switch (a) {
+        case 1:
+            cout << "Введите размер квадрата: ";
+            cin >> chislo;
+            cout << "Введите текстуру: ";
+            cin >> textura;
+            system("cls");
+            cout << "Результат:\n";
+            for (int y = 0; y < chislo; y++) {
+                for (int x = 0; x < chislo; x++) {
+                    cout << textura << " ";
+                }
+                cout << "\n";
+            }
+            break;
+        case 2:
+            cout << "Введите размер квадрата: ";
+            cin >> chislo;
+            cout << "Введите текстуру: ";
+            cin >> textura;
+            system("cls");
+            cout << "Результат:\n";
+            for (int y = 0; y < chislo; y++) {
+                for (int x = 0; x < chislo; x++) {
+                    if (y == 0 || x == 0 || x == chislo - 1 || y == chislo - 1) {
+                        cout << textura << " ";
+                    }
+                    else {
+                        cout << ". ";
+                    }
+                }
+                cout << "\n";
+            }
+            break;
+        }
+        break;
+
+    case 3:
+        cout << "[1] Заполненный\n[2] Пустой\n";
+        cin >> a;
+        system("cls");
+        switch (a) {
+        case 1:
+            cout << "Введите высоту: ";
+            cin >> visota;
+            cout << "Введите ширину: ";
+            cin >> shirena;
+            cout << "Введите текстуру: ";
+            cin >> textura;
+            system("cls");
+            cout << "Результат:\n";
+            for (int y = 0; y < visota; y++) {
+                for (int x = 0; x < shirena; x++) {
+                    cout << textura << " ";
+                }
+                cout << "\n";
+            }
+            break;
+
+        case 2:
+            cout << "Введите высоту: ";
+            cin >> visota;
+            cout << "Введите ширину: ";
+            cin >> shirena;
+            cout << "Введите текстуру: ";
+            cin >> textura;
+            system("cls");
+            cout << "Результат:\n";
+            for (int y = 0; y < visota; y++) {
+                for (int x = 0; x < shirena; x++) {
+                    if (y == 0 || x == 0 || x == shirena - 1 || y == visota - 1) {
+                        cout << textura << " ";
+                    }
+                    else {
+                        cout << ". ";
+                    }
+                }
+                cout << "\n";
+            }
+            break;
+        }
+        break;
+
+    case 4:
+        cout << "Фигура: \"Треугольник\"\n\n";
+        cout << "[1] Заполненный\n[2] Пустой\n\n";
+        cout << "Выберите тип: ";
+        cin >> a;
+        system("cls");
+
+        cout << "Фигура: \"Треугольник\"\n\n";
+        cout << "Введите высоту: ";
+        cin >> visota;
+        cout << "Введите текстуру: ";
+        cin >> textura;
+        system("cls");
+
+        cout << "Результат:\n\n";
+
+        if (a == 1) {
+            for (int i = 1; i <= visota; i++) {
+                for (int j = 0; j < visota - i; j++) {
+                    cout << "  ";
+                }
+                for (int j = 0; j < 2 * i - 1; j++) {
+                    cout << textura << " ";
+                }
+                cout << "\n";
+            }
+        }
+        else if (a == 2) {
+            for (int i = 1; i <= visota; i++) {
+                for (int j = 0; j < visota - i; j++) {
+                    cout << "  ";
+                }
+
+                if (i == 1) {
+                    cout << textura;
+                }
+                else if (i == visota) {
+                    for (int j = 0; j < 2 * i - 1; j++) {
+                        cout << textura << " ";
+                    }
+                }
+                else {
+                    cout << textura;
+                    for (int j = 0; j < 2 * (i - 1) - 1; j++) {
+                        cout << "  ";
+                    }
+                    cout << textura;
+                }
+                cout << "\n";
+            }
+        }
+        break;
+    case 5:
+        cout << "Фигура: \"Решетка\"\n\n";
+        cout << "Введите высоту: ";
+        cin >> visota;
+        cout << "Введите ширину: ";
+        cin >> shirena;
+        cout << "Введите текстуру: ";
+        cin >> textura;
+        system("cls");
+
+        cout << "Результат:\n\n";
+
+        // Одна сетка (средняя плотность)
+        for (int y = 0; y < visota; y++) {
+            for (int x = 0; x < shirena; x++) {
+                if ((y > 0 && y % 2 == 0) || (x > 0 && x % 2 == 0)) {
+                    cout << textura << " ";
+                }
+                else {
+                    cout << ". ";
+                }
+            }
+            cout << "\n";
+        }
+        break;
+    }
+    return 0;
+}
