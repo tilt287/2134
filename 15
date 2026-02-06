@@ -200,7 +200,7 @@ int main() {
 
         cout << "Результат:\n\n";
 
-        // Одна сетка (средняя плотность)
+        
         for (int y = 0; y < visota; y++) {
             for (int x = 0; x < shirena; x++) {
                 if ((y > 0 && y % 2 == 0) || (x > 0 && x % 2 == 0)) {
