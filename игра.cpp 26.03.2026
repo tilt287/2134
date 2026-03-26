@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+int main() {
+	setlocale(LC_ALL, "Russian");
+	int menu;
+	int otvet;
+	int otvet2;
+	int otvet3;
+	int otvet4;
+
+
+	cout << "Игра" << endl<<endl;
+	 
+	bool exitmenu = false; 
+		cout << "[ 1 ] Начать игру" << endl;
+		cout << "[ 2 ] Выйти" << endl;
+
+		
+
+		cin >> menu;
+
+		
+
+		if (menu == 1) {
+			cout << "Уровень сложности: Лёгкий";
+			cout << "Задание 1" << endl;
+			cout << "25 + 38 = ?" << endl;
+			cin >> otvet;
+			
+			if ( otvet == 63) {
+				cout << "Всё верно, следующий вопрос" << endl;
+			}
+			else {
+				cout << "Неправильно, -1 жизнь" << endl;
+			}
+		}
+		cout << "Задание 2" << endl;
+		cout << "1 + 9 = ?" << endl;
+		cin >> otvet2;
+
+		if (otvet2 == 10) {
+			cout << "Всё верно, следующий вопрос" << endl;
+		}
+		else {
+			cout << "Неправильно, -1 жизнь" << endl;
+			}
+
+		cout << "Задание 3" << endl;
+		cout << "23 + 95" << endl;
+		cin >> otvet3;
+
+		if (otvet3 == 118) {
+			cout << "Всё верно, следующий вопрос" << endl;
+		}
+		else {
+			cout << "Неправильно, -1 жизнь" << endl;
+		}
+		cout << "Задание 3" << endl;
+		cout << "100 + 300" << endl;
+		cin >> otvet4;
+
+		if (otvet4 == 400) {
+			cout << "Всё верно, игра закончена" << endl;
+		}
+		else {
+			cout << "Неправильно, -1 жизнь" << endl;
+		}
+
+return 0;
+}
