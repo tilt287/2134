@@ -1,70 +1,174 @@
 #include <iostream>
 using namespace std;
+
 int main() {
-	setlocale(LC_ALL, "Russian");
-	int menu;
-	int otvet;
-	int otvet2;
-	int otvet3;
-	int otvet4;
+	setlocale(0, "");
 
+	char name[20];
 
-	cout << "Игра" << endl<<endl;
-	 
-	bool exitmenu = false; 
-		cout << "[ 1 ] Начать игру" << endl;
-		cout << "[ 2 ] Выйти" << endl;
+	srand(time(0));
 
+	int setting = 1;
+	int choice;
+
+	do {
+		cout << "Game counter\n";
+		cout << "1. Начать игру\n";
+		cout << "2. Настройки (сейчас: ";
 		
 
-		cin >> menu;
+		switch (setting) {
+		case 1: cout << "Лёгкая + (1 очков)"; break;
+		case 2: cout << "Средняя - (2 очков)"; break;
+		case 3: cout << "Высокая * и / (3 очков)"; break;
+		case 4: cout << "Очень высокая микс (5 очков)"; break;
+		}
 
-		
+		cout << ")\n";
+		cout << "3. Выход\n";
+		cout << "Выбор: ";
+		cin >> choice;
+		system("cls");
 
-		if (menu == 1) {
-			cout << "Уровень сложности: Лёгкий";
-			cout << "Задание 1" << endl;
-			cout << "25 + 38 = ?" << endl;
-			cin >> otvet;
+
+		switch (choice) {
+		case 2: {
+			cout << "--- НАСТРОЙКИ ---\n";
+			cout << "1. Лёгкая - 1 очко\n";
+			cout << "2. Средняя - 2 очка\n";
+			cout << "3. Высокая - 3 очка\n";
+			cout << "4. Очень высокая - 5 очков\n";
+			cout << "Выберите сложность: ";
+			cin >> setting;
+			system("cls");
+			break;
+		}
+
+		case 1: {
+			cout << "\nВаше имя(макс. 20 симв.): ";
+			cin.ignore();
+			cin.getline(name, 20);
+
+			int correct = 0;
+			int score = 0;
+			int lives = 5;
+			int points;
+			int asked = 0;
+
+			switch (setting) {
+			case 1: { points = 1; break; }
+			case 2: { points = 2; break; }
+			case 3: { points = 3; break; }
+			case 4: { points = 5; break; }
+			default:points = 1;
+			}
+
+			cout << "\nНачинаем игру!\n";
+			cout << "У вас " << lives << " жизней. Каждая ошибка отнимает 1 жизнь\n";
+			cout << "За каждый правильный ответ вы получите " << points << " очков\n";
+			cout << "Игра закончится если у вас закончатся жизни или вы ответите на 10 вопросов\n\n";
+
+			while (lives > 0 && asked < 10) {
+				int num1, num2, ans, user;
+				char op;
+
+				switch (setting) {
+				case 1: {
+					num1 = rand() % 90 + 10;				//по эксперементировать почему 90+10
+					num2 = rand() % 90 + 10;				//по эксперементировать почему 90+10		
+					op = '+';
+					ans = num1 + num2;
+					break;
+				}
+				case 2: {
+					num1 = rand() % 90 + 10;				//по эксперементировать почему 90+10
+					num2 = rand() % 90 + 10;				//по эксперементировать почему 90+10		и почему t
+					if (num1 < num2) {
+						int t = num1;
+						num1 = num2;
+						num2 = t;
+					}
+				case 3: {
+					int opType = rand() % 2;
+					if (opType == 0) {
+						num1 = rand() % 900 + 100;
+						num2 = rand() % 900 + 100;
+						op = '*';
+						ans = num1 * num2;
+					}
+					else {
+						ans = rand() % 900 + 100;
+						num2 = rand() % 900 + 100;
+						num1 = ans * num2;
+						op = '/';
+					}
+					break;
+				}
+				case 4: {
+					int opType = rand() % 4;
+					switch (opType) {
+					case 0: {
+						num1 = rand() % 9000 + 1000;
+						num2 = rand() % 9000 + 1000;
+						op = '+';
+						ans = num1 + num2;
+						break;
+					}
+					case 1: {
+						num1 = rand() % 9000 + 1000;
+						num2 = rand() % 9000 + 1000;
+						if (num1 < num2) {
+							int t = num1;
+							num1 = num2;
+							num2 = t;
+						}
+						op = '-';
+						ans = num1 - num2;
+						break;
+					}
+					case 2: {
+						num1 = rand() % 9000 + 1000;
+						num2 = rand() % 9000 + 1000;
+						op = '*';
+						ans = num1 * num2;
+						break;
+					}
+					case 3: {
+						ans = rand() % 9000 + 1000;
+						num2 = rand() % 9000 + 1000;
+						num1 = ans * num2;
+						op = '/';
+						break;
+					}
+					}
+					break;
+				}
+				}
+
+					  asked++;
+					  cout << "Вопрос " << asked << "<3 Жизни: " << lives << ") | ";
+					  cout << num1 << " " << op << " " << num2 << " = ";
+					  cin >> user;
+
+					  if (user == ans) {
+						  cout << "Верно! +" << points << " очков\n";
+						  correct++;
+						  score += points;
+					  }
+					  else {
+						  lives--;
+						  cout << "Ошибка! Правильный ответ: " << ans << "\n";
+					  }
+				}
+
+				cout << "\n=== РЕЗУЛЬТАТ ===\n";
+				cout << "Игрок: " << name << "\n";
+				cout << "Правильно: " << correct << " из 10\n";
+				cout << "Очки: " << score << "\n";
+			}
+
+		}
+		}
+			  return 0;
 			
-			if ( otvet == 63) {
-				cout << "Всё верно, следующий вопрос" << endl;
-			}
-			else {
-				cout << "Неправильно, -1 жизнь" << endl;
-			}
-		}
-		cout << "Задание 2" << endl;
-		cout << "1 + 9 = ?" << endl;
-		cin >> otvet2;
-
-		if (otvet2 == 10) {
-			cout << "Всё верно, следующий вопрос" << endl;
-		}
-		else {
-			cout << "Неправильно, -1 жизнь" << endl;
-			}
-
-		cout << "Задание 3" << endl;
-		cout << "23 + 95" << endl;
-		cin >> otvet3;
-
-		if (otvet3 == 118) {
-			cout << "Всё верно, следующий вопрос" << endl;
-		}
-		else {
-			cout << "Неправильно, -1 жизнь" << endl;
-		}
-		cout << "Задание 3" << endl;
-		cout << "100 + 300" << endl;
-		cin >> otvet4;
-
-		if (otvet4 == 400) {
-			cout << "Всё верно, игра закончена" << endl;
-		}
-		else {
-			cout << "Неправильно, -1 жизнь" << endl;
-		}
-
-return 0;
-}
+}while (choice != 4);
