@@ -4,7 +4,7 @@ using namespace std;
 int main() {
 	setlocale(0, "");
 
-	char name[20];
+	char name[100];
 
 	srand(time(0));
 
@@ -15,13 +15,17 @@ int main() {
 		cout << "Game counter\n";
 		cout << "1. Начать игру\n";
 		cout << "2. Настройки (сейчас: ";
-		
+
 
 		switch (setting) {
-		case 1: cout << "Лёгкая + (1 очков)"; break;
-		case 2: cout << "Средняя - (2 очков)"; break;
-		case 3: cout << "Высокая * и / (3 очков)"; break;
-		case 4: cout << "Очень высокая микс (5 очков)"; break;
+		case 1: cout << "Лёгкая + (1 очков)";
+			break;
+		case 2: cout << "Средняя - (2 очков)";
+			break;
+		case 3: cout << "Высокая * и / (3 очков)";
+			break;
+		case 4: cout << "Очень высокая микс (5 очков)";
+			break;
 		}
 
 		cout << ")\n";
@@ -45,9 +49,9 @@ int main() {
 		}
 
 		case 1: {
-			cout << "\nВаше имя(макс. 20 симв.): ";
+			cout << "\nВаше имя: ";
 			cin.ignore();
-			cin.getline(name, 20);
+			cin.getline(name, 100);
 
 			int correct = 0;
 			int score = 0;
@@ -56,10 +60,22 @@ int main() {
 			int asked = 0;
 
 			switch (setting) {
-			case 1: { points = 1; break; }
-			case 2: { points = 2; break; }
-			case 3: { points = 3; break; }
-			case 4: { points = 5; break; }
+			case 1: {
+				points = 1;
+				break;
+			}
+			case 2: {
+				points = 2;
+				break;
+			}
+			case 3: {
+				points = 3;
+				break;
+			}
+			case 4: {
+				points = 5;
+				break;
+			}
 			default:points = 1;
 			}
 
@@ -74,15 +90,15 @@ int main() {
 
 				switch (setting) {
 				case 1: {
-					num1 = rand() % 90 + 10;				//по эксперементировать почему 90+10
-					num2 = rand() % 90 + 10;				//по эксперементировать почему 90+10		
+					num1 = rand() % 90 + 10;
+					num2 = rand() % 90 + 10;
 					op = '+';
 					ans = num1 + num2;
 					break;
 				}
 				case 2: {
-					num1 = rand() % 90 + 10;				//по эксперементировать почему 90+10
-					num2 = rand() % 90 + 10;				//по эксперементировать почему 90+10		и почему t
+					num1 = rand() % 90 + 10;
+					num2 = rand() % 90 + 10;
 					if (num1 < num2) {
 						int t = num1;
 						num1 = num2;
@@ -169,6 +185,7 @@ int main() {
 
 		}
 		}
-			  return 0;
-			
-}while (choice != 4);
+		return 0;
+
+	} while (choice != 4);
+}
