@@ -1,0 +1,315 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+    setlocale(0, "");
+    char names[10][50];
+    int scores[10];
+    int corrects[10];
+    int gamesPlayed[10];
+    int leaderCount = 0;
+
+    srand(time(0));
+
+    int settings = 1;
+    int choice;
+
+    do {
+        cout << "=== ТРЕНАЖЕР ===\n";
+        cout << "1. Запуск\n";
+        cout << "2. Настройки (сейчас: ";
+
+        switch (settings) {
+        case 1: cout << "Лёгкая + (10 очков)"; break;
+        case 2: cout << "Средняя - (20 очков)"; break;
+        case 3: cout << "Высокая * и / (30 очков)"; break;
+        case 4: cout << "Очень высокая микс (50 очков)"; break;
+        }
+
+        cout << ")\n";
+        cout << "3. Таблица лидеров\n";
+        cout << "4. Выход\n";
+        cout << "Выбор: ";
+        cin >> choice;
+        system("cls");
+
+        switch (choice) {
+        case 2: {
+            cout << "--- НАСТРОЙКИ ---\n";
+            cout << "1. Лёгкая (сложение, двузначные числа) - 10 очков\n";
+            cout << "2. Средняя (вычитание, двузначные числа) - 20 очков\n";
+            cout << "3. Высокая (умножение и деление, трезначные числа) - 30 очков\n";
+            cout << "4. Очень высокая (микс из всех операций, четырехзначные числа) - 50 очков\n";
+            cout << "Выберите сложность: ";
+            cin >> settings;
+            system("cls");
+            break;
+        }
+
+        case 1: {
+            char name[50];
+            cout << "\nВаше имя: ";
+            cin.ignore();
+            cin.getline(name, 50);
+
+            int correct = 0;
+            int score = 0;
+            int lives = 5;
+            int pointsPerQuestion;
+            int questionsAsked = 0;
+
+            switch (settings) {
+            case 1: { pointsPerQuestion = 10; break; }
+            case 2: { pointsPerQuestion = 20; break; }
+            case 3: { pointsPerQuestion = 30; break; }
+            case 4: { pointsPerQuestion = 50; break; }
+            default:pointsPerQuestion = 10;
+            }
+
+            cout << "\nНачинаем игру!\n";
+            cout << "У вас " << lives << " жизней. Каждая ошибка отнимает 1 жизнь\n";
+            cout << "За каждый неправильный ответ вы получите " << pointsPerQuestion << " очков\n";
+            cout << "Игра закончится если у вас закончатся жизни или вы ответите на 10 вопросов\n\n";
+
+            while (lives > 0 && questionsAsked < 10) {
+                int a, b, ans, user;
+                char op;
+
+                switch (settings) {
+                case 1: {
+                    a = rand() % 90 + 10;
+                    b = rand() % 90 + 10;
+                    op = '+';
+                    ans = a + b;
+                    break;
+                }
+                case 2: {
+                    a = rand() % 90 + 10;
+                    b = rand() % 90 + 10;
+                    if (a < b) {
+                        int t = a;
+                        a = b;
+                        b = t;
+                    }
+                    op = '-';
+                    ans = a - b;
+                    break;
+                }
+                case 3: {
+                    int opType = rand() % 2;
+                    if (opType == 0) {
+                        a = rand() % 900 + 100;
+                        b = rand() % 900 + 100;
+                        op = '*';
+                        ans = a * b;
+                    }
+                    else {
+                        ans = rand() % 900 + 100;
+                        b = rand() % 900 + 100;
+                        a = ans * b;
+                        op = '/';
+                    }
+                    break;
+                }
+                case 4: {
+                    int opType = rand() % 4;
+                    switch (opType) {
+                    case 0: {
+                        a = rand() % 9000 + 1000;
+                        b = rand() % 9000 + 1000;
+                        op = '+';
+                        ans = a + b;
+                        break;
+                    }
+                    case 1: {
+                        a = rand() % 9000 + 1000;
+                        b = rand() % 9000 + 1000;
+                        if (a < b) {
+                            int t = a;
+                            a = b;
+                            b = t;
+                        }
+                        op = '-';
+                        ans = a - b;
+                        break;
+                    }
+                    case 2: {
+                        a = rand() % 9000 + 1000;
+                        b = rand() % 9000 + 1000;
+                        op = '*';
+                        ans = a * b;
+                        break;
+                    }
+                    case 3: {
+                        ans = rand() % 9000 + 1000;
+                        b = rand() % 9000 + 1000;
+                        a = ans * b;
+                        op = '/';
+                        break;
+                    }
+                    }
+                    break;
+                }
+                }
+
+                questionsAsked++;
+                cout << "Вопрос " << questionsAsked << "<3 Жизни: " << lives << ") | ";
+                cout << a << " " << op << " " << b << " = ";
+                cin >> user;
+
+                if (user == ans) {
+                    cout << "Верно! +" << pointsPerQuestion << " очков\n";
+                    correct++;
+                    score += pointsPerQuestion;
+                }
+                else {
+                    lives--;
+                    cout << "Ошибка! Правильный ответ: " << ans << "\n";
+                    cout << "Потеряна 1 жизнь! Осталось жизней: " << lives << "\n";
+
+                    if (lives == 0) {
+                        cout << "\nИГРА ОКОНЧЕНА! У вас закончились жизни!\n";
+                    }
+                }
+                cout << "\n";
+            }
+
+            cout << "\n=== РЕЗУЛЬТАТ ===\n";
+            cout << "Игрок: " << name << "\n";
+            cout << "Всего вопросов: " << questionsAsked << "\n";
+            cout << "Правильно: " << correct << " из 10\n";
+            cout << "Ошибок: " << (questionsAsked - correct) << "\n";
+            cout << "Очки за игру: " << score << "\n";
+
+            if (lives == 0) {
+                cout << "Причина окончания: Закончились жизни\n";
+            }
+            else {
+                cout << "Причина окончания: Пройдено 10 вопросов\n";
+            }
+
+            int playerIndex = -1;
+            for (int i = 0; i < leaderCount; i++) {
+                bool same = true;
+                for (int j = 0; j < 50; j++) {
+                    if (names[i][j] != name[j]) {
+                        same = false;
+                        break;
+                    }
+                    if (name[j] == '\0')break;
+                }
+                if (same) {
+                    playerIndex = i;
+                    break;
+                }
+            }
+
+            if (playerIndex != -1) {
+                scores[playerIndex] += score;
+                corrects[playerIndex] += correct;
+                gamesPlayed[playerIndex]++;
+                cout << "\nИгрок " << name << " уже есть в таблице!\n";
+                cout << "Добавлено " << score << " очков к общей сумме.\n";
+                cout << "Всего очков: " << scores[playerIndex] << "\n";
+            }
+
+            else if (leaderCount < 10) {
+                int i;
+                for (i = 0; name[i] != '\0'; i++) {
+                    names[leaderCount][i] = name[i];
+                }
+                names[leaderCount][i] = '\0';
+
+                scores[leaderCount] = score;
+                corrects[leaderCount] = correct;
+                gamesPlayed[leaderCount] = 1;
+                leaderCount++;
+                cout << "\n Новый игрок добавлен в таблицу лидеров!\n";
+            }
+            else {
+                cout << "\nТаблица лидеров заполнена! Ваш результат не сохранен.\n";
+            }
+            break;
+        }
+        case 3: {
+            cout << "\n=== ТАБЛИЦА ЛИДЕРОВ ===\n";
+            if (leaderCount == 0) {
+                cout << "Таблица лидеров пуста\n";
+            }
+            else {
+                for (int i = 0; i < leaderCount - 1; i++) {
+                    for (int j = 0; j < leaderCount - i - 1; j++) {
+                        if (scores[j] < scores[j + 1]) {
+                            int tempScore = scores[j];
+                            scores[j] = scores[j + 1];
+                            scores[j + 1] = tempScore;
+
+                            int tempCorrect = corrects[j];
+                            corrects[j] = corrects[j + 1];
+                            corrects[j + 1] = tempCorrect;
+
+                            int tempGames = gamesPlayed[j];
+                            gamesPlayed[j] = gamesPlayed[j + 1];
+                            gamesPlayed[j + 1] = tempGames;
+
+                            char tempName[50];
+                            int k;
+                            for (k = 0; names[j][k] != '\0'; k++) {
+                                tempName[k] = names[j][k];
+                            }
+                            tempName[k] = '\0';
+
+                            for (k = 0; names[j + 1][k] != '\0'; k++) {
+                                names[j][k] = names[j + 1][k];
+                            }
+                            names[j][k] = '\0';
+
+                            for (k = 0; tempName[k] != '\0'; k++) {
+                                names[j + 1][k] = tempName[k];
+                            }
+                            names[j + 1][k] = '\0';
+                        }
+                    }
+                }
+
+                cout << "Место | Игрок | Всего очков | Игр | Среднее за игру\n";
+                cout << "------------------------------------------------\n";
+
+                for (int i = 0; i < leaderCount; i++) {
+                    int avgScore = scores[i] / gamesPlayed[i];
+                    cout << i + 1 << ".    | " << names[i];
+
+                    int len = 0;
+                    for (int j = 0; names[i][j] != '\0'; j++)len++;
+
+                    cout << " | " << scores[i];
+
+                    if (scores[i] < 10) cout << "        ";
+                    else if (scores[i] < 100) cout << "          ";
+                    else if (scores[i] < 1000) cout << "      ";
+                    else cout << "       ";
+
+                    cout << "| " << gamesPlayed[i] << "   | " << avgScore << "\n";
+                }
+            }
+            break;
+        }
+        case 4: {
+            cout << "\nСпасибо за игру!\n";
+            break;
+        }
+        default: {
+            cout << "\nНеверный выбор! Попробуйте снова.\n";
+            break;
+        }
+        }
+        if (choice != 4 && choice != 2) {
+            cout << "\nНажмите Enter для продолжения...";
+            cin.ignore();
+            cin.get();
+            system("cls");
+        }
+
+    } while (choice != 4);
+    return 0;
+}
